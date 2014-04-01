@@ -1,0 +1,62 @@
+/* line 1, sample.scss */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 8, sample.scss */
+.section, .section-1, .section-2, .section-3, .section-4, .section-5 {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-attachment: fixed;
+}
+
+/* line 15, sample.scss */
+.section-1 {
+  background-image: url("./images/photo.jpg");
+}
+
+/* line 20, sample.scss */
+.section-2 {
+  background-color: #000;
+}
+
+/* line 25, sample.scss */
+.section-3 {
+  background-image: url("./images/photo.jpg");
+}
+
+/* line 30, sample.scss */
+.section-4 {
+  background-color: #aaa;
+}
+
+/* line 35, sample.scss */
+.section-5 {
+  background-image: url("./images/photo.jpg");
+}
+
+/* line 40, sample.scss */
+.section-2__text {
+  position: absolute;
+  top: 50%;
+  left: -386px;
+  margin-top: -48px;
+  width: 386px;
+  height: 97px;
+  background-image: url("./images/sample-word.png");
+}
+
+/* line 50, sample.scss */
+.section-3__text {
+  position: absolute;
+  top: 50%;
+  left: -386px;
+  margin-top: -48px;
+  width: 386px;
+  height: 97px;
+  background-image: url("./images/sample-word.png");
+}

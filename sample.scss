@@ -1,0 +1,58 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-attachment: fixed;
+}
+
+.section-1 {
+  @extend .section;
+  background-image: url('./images/photo.jpg');
+}
+
+.section-2 {
+  @extend .section;
+  background-color: #000;
+}
+
+.section-3 {
+  @extend .section;
+  background-image: url('./images/photo.jpg');
+}
+
+.section-4 {
+  @extend .section;
+  background-color: #aaa;
+}
+
+.section-5 {
+  @extend .section;
+  background-image: url('./images/photo.jpg');
+}
+
+.section-2__text {
+  position: absolute;
+  top: 50%;
+  left: -386px;
+  margin-top: -48px;
+  width: 386px;
+  height: 97px;
+  background-image: url('./images/sample-word.png');
+}
+
+.section-3__text {
+  position: absolute;
+  top: 50%;
+  left: -386px;
+  margin-top: -48px;
+  width: 386px;
+  height: 97px;
+  background-image: url('./images/sample-word.png');
+}
