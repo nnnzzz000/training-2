@@ -1,40 +1,47 @@
-$(function() {
-  var $win = $(window);
-  var centerRange = 50;
-  var textMoveRange = 300;
-  var textNegativePosition = 386;
+$(function () {
+  var $win = $(window), centerRange = 50, textMoveRange = 300, textNegativePosition = 386, sectionHalf = 250, section2Top = 500, section2Center = 750, $section2Text = $('.section-2__text'), section2TextWidth = 193, section3Top = 1000, section3Center = 1250, $section3Text = $('.section-3__text'), section3TextWidth = 193,
 
-  var section2Center = 750;
-  var $section2Text = $('.section-2__text');
-  var section2TextWidth = 193;
-
-  var section3Center = 1250;
-  var $section3Text = $('.section-3__text');
-  var section3TextWidth = 193;
-
-  var textMoveStart = function(){
-    return section2Center - ( centerRange + textMoveRange);
-  };
-  var textMoveEnd = function(){
+  textMoveStart = function () {
+    return section2Center - (centerRange + textMoveRange);
+  }
+  textMoveEnd = function () {
     return section2Center - centerRange;
-  };
-
-  var isSectionCenter = function(winVerticalCenter){
+  }
+  isSectionCenter = function (winVerticalCenter){
     return section2Center - centerRange <= winVerticalCenter && winVerticalCenter <= section2Center + centerRange;
   }
 
-  var text3MoveStart = function(){
-    return section3Center - ( centerRange + textMoveRange );
+  text3MoveStart = function () {
+    return section3Center - (centerRange + textMoveRange );
   }
-  var text3MoveEnd = function(){
+  text3MoveEnd = function () {
     return section3Center - centerRange;
   }
-  var isSection3Center = function(winVerticalCenter){
+  isSection3Center = function (winVerticalCenter) {
     return section3Center - centerRange <= winVerticalCenter && winVerticalCenter <= section3Center + centerRange;
-  }
+  };
 
-  $win.on('scroll', function(e) {
+  var timer_id = null;
+  var isAutoScrolling = false;
+
+  $win.on('scroll', function (e) {
     var position = $win.scrollTop();
+
+    $win.trigger('scrolling', position);
+
+    if( !isAutoScrolling ){
+      if( timer_id != null ){
+        clearTimeout(timer_id);
+      }
+
+      timer_id = setTimeout(function () {
+        $win.trigger('endscroll', position);
+      }, 500);
+    }
+  })
+
+  $win.on('scrolling', function (e, position) {
+    // sampleTextを動かす処理
     var winHeight = $win.height();
     var winWidth = $win.width();
     var winVerticalCenter = Math.floor(winHeight / 2 + position);
@@ -62,6 +69,24 @@ $(function() {
 
     if( isSection3Center(winVerticalCenter) ){
       $section3Text.css('left', section3TextLeftPosition);
+    }
+  });
+
+  $win.on('endscroll', function (e, position) {
+    // スクロール後の処理
+    var top = 0;
+
+    if( section2Top-sectionHalf < position && position < section2Center ){
+      top = section2Top;
+    } else if( section2Center < position && position < section3Center ){
+      top = section3Top;
+    }
+
+    if (top != 0) {
+      isAutoScrolling = true;
+      $('html, body').animate({scrollTop: top},{complete: function (){
+        isAutoScrolling = false;
+      }});
     }
   })
 })
